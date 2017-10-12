@@ -68,31 +68,50 @@
 
          
 			<!-- Formulário-->
-      <form id="formExemplo" data-toggle="validator" method='POST'>		 
+      <form id="cadastro-passageiro" data-toggle="validator" method='POST'>
+      {% csrf_token %} 
         <div class="row">
-          <div class="col-md-4">
-            <div class="form-group" >		 
-              <label for="textNome" class="control-label">Nome Completo</label>		   
-              <input id="textNome" class="form-control" placeholder="Digite o nome do Passageiro" type="text">		
-            </div>	
-          </div>
 
-           <div class="col-md-3"> 
-            <div class="form-group">      
-              <label for="telefone" class="control-label">Telefone</label>        
-              <input id="telefone" class="form-control" placeholder="Digite o telefone..." type="tel">      
+          <div class="col-md-2">
+            <div class="form-group" >    
+              <label for="textCpf" class="control-label">Cpf</label>      
+              <input id="inputCpf" name="inputCpf" class="form-control" placeholder="Digite o cpf" type="text">    
             </div>  
           </div>
 
-          <div class="col-md-3">	  
+
+          <div class="col-md-3">
+            <div class="form-group" >		 
+              <label for="inputNome" class="control-label">Nome Completo</label>		   
+              <input id="inputNome" name="inputNome" class="form-control" placeholder="Digite seu nome" type="text">		
+            </div>	
+          </div>
+
+           <div class="col-md-2"> 
+            <div class="form-group">      
+              <label for="inputTelefone" class="control-label">Telefone</label>        
+              <input id="inputTelefone" name="inputTelefone" class="form-control" placeholder="Digite o telefone..." type="text">      
+            </div>  
+          </div>
+
+          <div class="col-md-3  ">	  
             <div class="form-group">		    
-              <label for="inputEmail" class="control-label">Email</label>		    
-              <input id="inputEmail" class="form-control" placeholder="Digite o E-mail do Passageiro" type="email">		  
+              <label for="Email" class="control-label">Email</label>		    
+              <input id="inputEmail" name="inputEmail" class="form-control" placeholder="Digite seu E-mail" type="text">		  
             </div>
-          </div>	 
+          </div>
+
+           <div class="col-md-2">    
+              <div class="form-group"> <label for="text" class="control-label">Pago?</label>
+                <select id="inputPago" name="inputPago" class="form-control">
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>     
+              </div>
+            </div>	 
 
           <div class="col-md-2">
-            <button type="submit" style="margin: auto; margin-top: 24px;" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
           </div>
         </div>		  
       </form>
@@ -105,22 +124,23 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Cod</th>
+                  <th>Cpf</th>
                   <th>Nome Completo</th>
                   <th>Telefone</th>
                   <th>Email</th>
-                  <th>Pagamento</th>
+                  <th>Pago</th>
                 </tr>
               </thead>
               <tbody>
+                {% for i in passageiro %}
                 <tr>
-                  <td>01</td>
-                  <td>José Algusto dos Santos</td>
-                  <td>(31) 989021479</td>
-                  <td>jose_anonimo@gmail.com</td>
-                  <td>OK</td>
+                  <td>{{i.inputCpf}}</td>
+                  <td>{{i.inputNome}}</td>
+                  <td>{{i.inputTelefone}}</td>
+                  <td>{{i.inputEmail}}</td>
+                  <td>{{i.inputPago}}</td>
                 </tr>
-                
+                {% endfor %}
               </tbody>
             </table>
           </div>

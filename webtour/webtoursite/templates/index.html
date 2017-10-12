@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 {% load static %}
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -65,87 +65,77 @@
               </p>
               <div class="row">
                 <div class="flight-ta row">
-                  <div class="col-md-3 col-sm-3">
-                    <form role="form" class="form-dropdown">
+
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="col-md-3 col-sm-3">
                       <div class="form-group">
                         <label for="inputText" class="sr-only">Origem</label>
                         <input name="deonde" type="text" id="inputOrigem" class="form-control" placeholder="Origem" required autofocus>
                       </div>
-                    </form>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-md-3 col-sm-3">
-                      <form role="form" class="form-dropdown">
+                    </div>
+
+                    
+                      <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                           <label for="inputText" class="sr-only">Destino</label>
                           <input name="destino" type="text" id="inputDestino" class="form-control" placeholder="Destino" required autofocus>
                         </div>
-                      </form>
-                    </div>
 
-                    <div class="col-md-3 col-sm-2">
-                      <form role="form" class="form-dropdown">
+                      </div>
+
+                      <div class="col-md-3 col-sm-3">
+
                         <div class="form-group">
                           <label for="inputDate" class="sr-only">Data</label>
                           <input name="data" type="date"id="inputData" class="form-control" placeholder="Data" required autofocus>
                         </div>
-                      </form>
-                    </div>
-
-
-
-
-
-
-
-
-                    <div class="col-md-2 col-sm-2">
-                      <div class="form-group">
-
-                        <select id="time" name="time" class="form-control">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                        </select>
                       </div>
-                    </div>
 
-                    <div class="col-md-12 col-sm-12">
-                      <div class="btn btn-default border-radius custom-button">
-                        Pesquisar
+                      <div class="col-md-2 col-sm-2">
+                        <div class="form-group">
+
+                          <select id="time" name="time" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
+
+                      <div class="col-md-12 col-sm-12">
+                        <div class="btn btn-default border-radius custom-button">
+                          Buscar
+                        </div>
+                      </div>
 
 
+
+                    </form>
                   </div>
-
-
-
-
                 </div>
-              </div>
-
-
+              </div>  
 
 
 
             </div>
-
-            <div class="mastfoot">
-              <div class="inner">
-                <p>Desenvolvido por Alunos da UNA - Sistemas de Inforamção </p>
-              </div>
-            </div>
-
           </div>
+
+
+
+
 
         </div>
 
       </div>
+
+    </div>
+
+  </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

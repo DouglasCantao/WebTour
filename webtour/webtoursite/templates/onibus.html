@@ -2,109 +2,156 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
 
-    <title>Web Tour</title>
+  <title>Web Tour</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{% static "bootstrap/assets/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="{% static "bootstrap/assets/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
 
-    <!-- CSS -->
-    <link href="{% static "bootstrap/onibus.css" %}" rel="stylesheet">
+  <!-- CSS -->
+  <link href="{% static "bootstrap/passageiro.css" %}" rel="stylesheet">
 
 
-    <script src="{% static "bootstrap/assets/js/ie-emulation-modes-warning.js" %}"></script>
+  <script src="{% static "bootstrap/assets/js/ie-emulation-modes-warning.js" %}"></script>
 
-    
-  </head>
 
-  <body>
+</head>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Web Tour</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'paineldecontrole' %}">Ínicio</a></li>
-            <li><a href="#">Meus Ônibus</a></li>
-            <li><a href="{% url 'passageiro' %}">Passageiros</a></li>
-            <li><a href="#">Relatórios</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Procurar...">
-          </form>
-        </div>
-      </div>
-    </nav>
+<body>
 
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-2 col-md-2 sidebar">    
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Viagens <span class="sr-only">(current)</span></a></li>        
-          </ul>
-    
-          </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Viagens do dia  {{ viagens.0.data_saida }}</h1> <!--Painel FIXO-->
-          <!--MENU PAINEL DE CONTROLE -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Web Tour</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'paineldecontrole' %}">Ínicio</a></li>
+          <li><a href="{% url 'onibus' %}">Ônibus</a></li>
+          <li><a href="{% url 'passageiro' %}">Passageiros</a></li>
+          <li><a href="#">Relatórios</a></li>
+        </ul>
+        <form class="navbar-form navbar-right">
+          <input type="text" class="form-control" placeholder="Procurar...">
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">    
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Lista de Frota <span class="sr-only">(current)</span></a></li>        
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Controle de Frota</h1> <!--Painel FIXO-->
+        <!--MENU PAINEL DE CONTROLE -->
 
 
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Empresa</th>
-                  <th>Origem</th>
-                  <th>Destino</th>
-                  <th>Dta Saída</th>
-                  <th>Dta Chegada</th>
-                  <th>Hora Saída</th>
-                  <th> Chegada</th>
-                  <th>Assentos Disp.</th>
-                  <th>Qtde Assentos</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for i in viagens %}
-                  <tr>
-                    <td>{{ i.nome_empresa }}</td>
-                    <td>{{ i.origem }}</td>
-                    <td>{{ i.destino }}</td>
-                    <td>{{ i.data_saida }}</td>
-                    <td>{{ i.data_chegada }}</td>
-                    <td>{{ i.hora_saida }}</td>
-                    <td>{{ i.hora_chegada }}</td>
-                    <td>{{ i.qtde_assentos }}</td>
-                    <td>{{ i.qtde_assentos_disp }}</td>
-                    <td><button name="viagem" type="submit" value="{{ i.id }}">Selecionar</button></td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+        <!-- Formulário-->
+        <form id="cadastroVeiculo" data-toggle="validator" method='POST'>	
+        {% csrf_token %}	 
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group" >		 
+                <label for="text" class="control-label">Placa</label>		   
+                <input id="inputPlaca" name="inputPlaca" class="form-control" placeholder="Digite a placa" type="text">		
+              </div>	
+            </div>
+
+            <div class="col-md-2">    
+              <div class="form-group">
+                <label for="text" class="control-label">Categoria</label>
+                <select id="inputCat_veiculo" name="inputCat_veiculo" class="form-control">
+                  <option value="Ônibus">O - Ônibus</option>
+                  <option value="Van">V - Van</option>
+                  <option value="Microônibus">M - Microônibus</option>
+                </select>
+              </div>
+
+            </div> 
+
+            <div class="col-md-2">    
+              <div class="form-group">        
+                <label for="text" class="control-label">Quantidade de lugares</label>        
+                <input id="inputLugares" name="inputLugares" class="form-control" placeholder="Informe a qtde..." type="text">     
+              </div>
+            </div> 
+
+            <div class="col-md-2">    
+              <div class="form-group">        
+                <label for="text" class="control-label">Autonomina</label>        
+                <input id="inputAutonomia" name="inputAutonomia" class="form-control" placeholder="Km\l" type="text">     
+              </div>
+            </div>  
+
+            <div class="col-md-2">    
+              <div class="form-group"> <label for="text" class="control-label">Pronto?</label>
+                <select id="inputVeic_pronto" name="inputVeic_pronto" class="form-control">
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>     
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </div>		  
+        </form>
+
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="col-md-1">Id</th>
+                <th class="col-md-2">Placa</th>
+                <th class="col-md-2">Categoria</th>
+                <th class="col-md-2">Qtde Lugares</th>
+                <th class="col-md-2">Km/l</th>
+                <th class="col-md-2">Pronto para Viagem?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in listar_onibus %}
+              <tr>
+                <td>{{i.inputId}}</td>
+                <td>{{i.inputPlaca}}</td>
+                <td>{{i.inputCat_veiculo}}</td>
+                <td>{{i.inputLugares}}</td>
+                <td>{{i.inputAutonomia}}</td>
+                <td>{{i.inputVeic_pronto}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -117,4 +164,4 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
-</html>
+  </html>

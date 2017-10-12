@@ -6,7 +6,8 @@ urlpatterns = [
 	url(r'^entrar$', views.entrar, name='entrar'),
 	url(r'^painel$', views.paineldecontrole, name='paineldecontrole'),
 	url(r'^cadastro$', views.cadastro, name='cadastro'),
-	url(r'^onibus$', views.onibus, name='onibus'),
+	url(r'^listaviagem$', views.listaviagem, name='listaviagem'),
 	url(r'^passageiro$', views.passageiro, name='passageiro'),
 	url(r'^contato$', views.contato, name='contato'),
+	url(r'^onibus$', views.onibus, name='onibus'),
 ]
