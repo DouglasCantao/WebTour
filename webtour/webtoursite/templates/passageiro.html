@@ -25,6 +25,11 @@
 
     <script src="{% static "bootstrap/assets/js/ie-emulation-modes-warning.js" %}"></script>
 
+  <script src="{% static "jquery-3.2.1.min.js" %}"></script>
+  <script src="{% static "form.js" %}"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     
   </head>
 
@@ -42,12 +47,6 @@
           <a class="navbar-brand" href="#">Web Tour</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'paineldecontrole' %}">Ínicio</a></li>
-            <li><a href="{% url 'onibus' %}">Ônibus</a></li>
-            <li><a href="{% url 'passageiro' %}">Passageiros</a></li>
-            <li><a href="#">Relatórios</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Procurar...">
           </form>
@@ -59,7 +58,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">    
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Lista de Passageiros <span class="sr-only">(current)</span></a></li>        
+            <li class="active"><a href="{% url 'paineldecontrole' %}">Painel de Controle <span class="sr-only">(current)</span></a></li>        
           </ul>
           </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -101,16 +100,7 @@
             </div>
           </div>
 
-           <div class="col-md-2">    
-              <div class="form-group"> <label for="text" class="control-label">Pago?</label>
-                <select id="inputPago" name="inputPago" class="form-control">
-                  <option value="Sim">Sim</option>
-                  <option value="Não">Não</option>
-                </select>     
-              </div>
-            </div>	 
-
-          <div class="col-md-2">
+          <div class="col-md-2" style="padding-top: 24px;">
             <button type="submit" class="btn btn-primary">Cadastrar</button>
           </div>
         </div>		  
@@ -128,17 +118,16 @@
                   <th>Nome Completo</th>
                   <th>Telefone</th>
                   <th>Email</th>
-                  <th>Pago</th>
                 </tr>
               </thead>
               <tbody>
-                {% for i in passageiro %}
+                {% for i in lista_passageiro %}
                 <tr>
-                  <td>{{i.inputCpf}}</td>
-                  <td>{{i.inputNome}}</td>
-                  <td>{{i.inputTelefone}}</td>
-                  <td>{{i.inputEmail}}</td>
-                  <td>{{i.inputPago}}</td>
+                  <td>{{i.cpf}}</td>
+                  <td>{{i.nome}}</td>
+                  <td>{{i.telefone}}</td>
+                  <td>{{i.email}}</td>
+                  <td id="{{ i.id }}" class="remove_passageiro"><i class="material-icons"><a href="#">delete</a></i></td>
                 </tr>
                 {% endfor %}
               </tbody>

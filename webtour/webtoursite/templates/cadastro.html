@@ -52,6 +52,8 @@
               <form class="form-register" method='POST'>
                 {% csrf_token %}
                 <h2 class="form-resgister-heading">Cadastro</h2>
+                    <label for="inputName" class="sr-only">Nome da Empresa</label>
+                <input name="name" type="name" id="inputName" class="form-control" placeholder="Empresa" required autofocus>
                 <label for="inputName" class="sr-only">Nome do Usuário</label>
                 <input name="name" type="name" id="inputName" class="form-control" placeholder="Usuário" required autofocus>
                 <label for="inputEmail" class="sr-only">Email</label>
@@ -59,7 +61,7 @@
                 <label for="inputPassword" class="sr-only">Senha</label>
                 <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Digite sua senha" required>
                 <label for="inputPasswordAgain" class="sr-only">Redigite a senha</label>
-                <input name="senha2" type="password" id="inputPasswordAgain" class="form-control" placeholder="Digite sua senha de novo" required>
+                <input name="senha2" type="password" id="inputPasswordAgain" class="form-control" placeholder="Digite sua senha novamente" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
               </form>
             </div>
