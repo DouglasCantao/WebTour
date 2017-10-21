@@ -20,11 +20,15 @@
   <link href="{% static "bootstrap/assets/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
 
   <!-- CSS -->
+  <link href="{% static "form.css" %}" rel="stylesheet">
   <link href="{% static "bootstrap/passageiro.css" %}" rel="stylesheet">
-
 
   <script src="{% static "bootstrap/assets/js/ie-emulation-modes-warning.js" %}"></script>
 
+  <script src="{% static "jquery-3.2.1.min.js" %}"></script>
+  <script src="{% static "form.js" %}"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -69,12 +73,21 @@
 
         <!-- Formulário-->
         <form id="cadastroVeiculo" data-toggle="validator" method='POST'>	
-        {% csrf_token %}	 
+        {% csrf_token %}
+        
+          {% if errors %}
+            <div class="row error">
+              {% if errors.inputPlaca %}{{ errors.inputPlaca }}<br/>{% endif %}    
+              {% if errors.inputAutonomia %}{{ errors.inputAutonomia }}<br/>{% endif %}   
+              {% if errors.inputLugares %}{{ errors.inputLugares }}<br/>{% endif %}   
+            </div>
+          {% endif %}
+
           <div class="row">
             <div class="col-md-2">
               <div class="form-group" >		 
                 <label for="text" class="control-label">Placa</label>		   
-                <input id="inputPlaca" name="inputPlaca" class="form-control" placeholder="Digite a placa" type="text">		
+                <input id="inputPlaca" name="inputPlaca" class="form-control{% if errors.inputPlaca %} error{% endif %}" placeholder="Digite a placa" type="text" value="{{ onibus.placa }}">
               </div>	
             </div>
 
@@ -92,28 +105,28 @@
 
             <div class="col-md-2">    
               <div class="form-group">        
-                <label for="text" class="control-label">Quantidade de lugares</label>        
-                <input id="inputLugares" name="inputLugares" class="form-control" placeholder="Informe a qtde..." type="text">     
+                <label for="text" class="control-label">Total de assentos</label>        
+                <input id="inputLugares" name="inputLugares" class="form-control{% if errors.inputLugares %} error{% endif %}" placeholder="0" type="number" value="{{ onibus.qtde_lugares }}">    
               </div>
             </div> 
 
             <div class="col-md-2">    
               <div class="form-group">        
-                <label for="text" class="control-label">Autonomina</label>        
-                <input id="inputAutonomia" name="inputAutonomia" class="form-control" placeholder="Km\l" type="text">     
+                <label for="text" class="control-label">Autonomia (Km/L)</label>        
+                <input id="inputAutonomia" name="inputAutonomia" class="form-control{% if errors.inputAutonomia %} error{% endif %}" step="0.01" placeholder="0.00" type="number" value="{{ onibus.autonomia }}">     
               </div>
             </div>  
 
             <div class="col-md-2">    
               <div class="form-group"> <label for="text" class="control-label">Pronto?</label>
                 <select id="inputVeic_pronto" name="inputVeic_pronto" class="form-control">
-                  <option value="Sim">Sim</option>
-                  <option value="Não">Não</option>
+                  <option value="True"{% if onibus.veic_pronto == 'True' %} selected{% endif %}>Sim</option>
+                  <option value="False"{% if onibus.veic_pronto == 'False' %} selected{% endif %}>Não</option>
                 </select>     
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-2" style="padding-top: 24px;">
               <button type="submit" class="btn btn-primary">Cadastrar</button>
             </div>
           </div>		  
@@ -130,20 +143,22 @@
                 <th class="col-md-1">Id</th>
                 <th class="col-md-2">Placa</th>
                 <th class="col-md-2">Categoria</th>
-                <th class="col-md-2">Qtde Lugares</th>
-                <th class="col-md-2">Km/l</th>
+                <th class="col-md-2">Total de Assentos</th>
+                <th class="col-md-2">Autonomia (Km/L)</th>
                 <th class="col-md-2">Pronto para Viagem?</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              {% for i in listar_onibus %}
+              {% for i in lista_onibus %}
               <tr>
-                <td>{{i.inputId}}</td>
-                <td>{{i.inputPlaca}}</td>
-                <td>{{i.inputCat_veiculo}}</td>
-                <td>{{i.inputLugares}}</td>
-                <td>{{i.inputAutonomia}}</td>
-                <td>{{i.inputVeic_pronto}}</td>
+                <td>{{ i.id }}</td>
+                <td>{{ i.placa }}</td>
+                <td>{{ i.categoria }}</td>
+                <td>{{ i.qtde_lugares }}</td>
+                <td>{{ i.autonomia }}</td>
+                <td>{% if i.veic_pronto %}Sim{% else %}Não{% endif %}</td>
+                <td id="{{ i.id }}" class="remove_onibus"><i class="material-icons"><a href="#">delete</a></i></td>
               </tr>
               {% endfor %}
             </tbody>
