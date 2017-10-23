@@ -120,7 +120,7 @@ def onibus(request):
 			#dic['lista_onibus'].append(dic['onibus'])
 			dic['onibus'] = Onibus()
 
-			return render(request,'onibus.html', dic)
+	return render(request,'onibus.html', dic)
 
 # Remover dados do banco
 def remove_onibus(request):
@@ -154,7 +154,7 @@ def passageiro(request):
 		dic['passageiro'].save()
 		dic['passageiro'] = Passageiro()
 
-		return render(request, 'passageiro.html', dic)
+	return render(request, 'passageiro.html', dic)
 
 #remove passageiro do banco
 def remove_passageiro(request):
@@ -162,15 +162,11 @@ def remove_passageiro(request):
 		obj = Passageiro.objects.get(pk=int(request.POST['id_passageiro']))
 		obj.delete()
 
-		return HttpResponse('Removido com sucesso.')
+	return HttpResponse('Removido com sucesso.')
 
 
 	##############################recuperar senha##########################################
-<<<<<<< HEAD
-	def recuperarsenha(request):
-=======
 def recuperarsenha(request):
->>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
 		return render(request, 'recuperarsenha.html')
 
 
@@ -282,4 +278,8 @@ def contato(request):
     return render(request, 'contato.html', context)
 
 ####################################################
+
+
+def cadastrarViagem(request):
+	return render(request, 'cadastrar-viagem.html')
 

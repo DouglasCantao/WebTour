@@ -1,10 +1,7 @@
 {% load static %}
 
-<<<<<<< HEAD
-=======
 {% load widget_tweaks %}
 
->>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +56,6 @@
 
 
              <form class="form-horizontal" method="post">
-<<<<<<< HEAD
               {% csrf_token %}
               {% for error in form.non_field_errors %}
               <div class="alert alert-danger">
@@ -67,62 +63,47 @@
               </div>
               {% endfor %}
               <fieldset>
-                {% for field in form %}
-                <div class="form-group{% if field.errors %} has-error{% endif %}">
-                  <label for="{{ field.auto_id }}" class="col-md-3 control-label">{{ field.label }}</label>
-                  <div class="col-md-9">
-                    {% render_field field class="form-control" %}
-                    {% for error in field.errors %}
-=======
-            {% csrf_token %}
-            {% for error in form.non_field_errors %}
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
-            {% endfor %}
-            <fieldset>
                 <div class="form-group{% if form.username.errors %} has-error{% endif %}">
                   <label for="{{ form.username.auto_id }}" class="col-md-3 control-label">{{ form.username.label }}</label>
-                  <div class="col-md-9">
-                    {% render_field form.username class="form-control" %}
-                    {% for error in form.username.errors %}
-                    <span class="help-block">{{ error }}</span>
-                    {% endfor %}
+
+                  <div class="form-group">
+                    <div class="col-md-5">
+                      {% render_field form.username class="form-control" %}
+                      {% for error in form.username.errors %}
+                      <span class="help-block">{{ error }}</span>
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
                 <div class="form-group{% if form.password.errors %} has-error{% endif %}">
                   <label for="{{ form.password.auto_id }}" class="col-md-3 control-label">{{ form.password.label }}</label>
-                  <div class="col-md-9">
-                    {% render_field form.password class="form-control" %}
-                    {% for error in form.password.errors %}
->>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
-                    <span class="help-block">{{ error }}</span>
-                    {% endfor %}
+                  <div class="form-group">
+                    <div class="col-md-5">
+                      {% render_field form.password class="form-control" %}
+                      {% for error in form.password.errors %}
+                      <span class="help-block">{{ error }}</span>
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
-<<<<<<< HEAD
-                {% endfor %}
+
                 <div class="form-group">
-                  <div class="col-md-9 col-md-offset-3">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                  <div class="col-md-3 col-md-offset-4">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-3 col-md-offset-4">
+                    <label>
+                      <a href="{% url 'accounts:register' %}">Cadastrar</a>
+                    </label>
                   </div>
                 </div>
               </fieldset>
+
+
             </form>
-=======
-                <div class="form-group">
-                  <div class="col-md-9 col-md-offset-3">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                  </div>
-                  <label style= "padding-top: 24px;">
-                    <a href="{% url 'accounts:register' %}">Cadastrar</a>
-                  </label>
-                </div>
-            </fieldset>
-
-
-        </form>
->>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
 
 
           </div>

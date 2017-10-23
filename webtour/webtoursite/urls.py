@@ -29,4 +29,5 @@ urlpatterns = [
 	url(r'^onibus$', views.onibus, name='onibus'),
 	url(r'^remove_onibus$', views.remove_onibus, name='remove_onibus'),
 	url(r'^remove_passageiro$', views.remove_passageiro, name='remove_passageiro'),
+	url(r'^cadastrarviagem$', views.cadastrarViagem, name='cadastrarviagem'),
 ]
