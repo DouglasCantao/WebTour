@@ -106,10 +106,22 @@
                     <!-- /.dropdown-messages -->
                 </li>
                 <!-- /.dropdown -->
+<<<<<<< HEAD
+=======
+                <li>Olá, {{ user }}</li>
+>>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
+<<<<<<< HEAD
+=======
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Sair</a></li>
+                {% else %}
+                <li><a href="{% url 'accounts:register' %}">Registro</a></li>
+                {% endif %}
+>>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
                     <ul class="dropdown-menu dropdown-tasks">
                         <li>
                             <a href="#">

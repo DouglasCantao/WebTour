@@ -13,14 +13,7 @@ def index(request):
 	return render(request, 'index.html')
 
 
-def cadastro(request):
-	if request.method == 'POST':
-		for key, value in request.POST.items():
-			print(key, value)
 
-		return render(request, 'index.html')
-
-	return render(request, 'cadastro.html')
 
 def paineldecontrole(request):
 	return render(request, 'paineldecontrole.html')

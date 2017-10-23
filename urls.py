@@ -1,8 +1,14 @@
-from django.conf.urls import url
-from . import views
+from django.conf.urls import include, url
+from django.contrib import admin
+from django.conf import settings
+from django.views.static import serve as serve_static
+from webtoursite import views
+
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
-	url(r'^painel$', views.paineldecontrole, name='paineldecontrole'),
-	url(r'^cadastro$', views.cadastro, name='cadastro'),
+	urlpatterns = [
+	url(r'^webtoursite/', include('webtoursite.urls')),
+    url(r'^admin/', admin.site.urls),
+    #url(r'^conta/', include('accounts.urls', namespace='accounts'))
+]
 ]

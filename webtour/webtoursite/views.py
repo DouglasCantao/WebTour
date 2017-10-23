@@ -166,7 +166,11 @@ def remove_passageiro(request):
 
 
 	##############################recuperar senha##########################################
+<<<<<<< HEAD
 	def recuperarsenha(request):
+=======
+def recuperarsenha(request):
+>>>>>>> 1c6bb3ac3692effaf0ab3562b25a958fcad0a942
 		return render(request, 'recuperarsenha.html')
 
 
