@@ -220,9 +220,39 @@ def contato(request):
     }
     return render(request, 'contato.html', context)
 
-####################################################
+####################################################cadastro viagem
 
-
+@acesso_autenticado
 def cadastrarViagem(request):
-         return render(request, 'cadastrar-viagem.html')
+  #Passando apenas os ônibus referente ao usuário logado para a modal
+  onibus = Onibus.objects.filter(dono_id=request.user.id)
+  ctx = {'onibus': onibus}
 
+
+  #Exibir viagem cadastradas
+  dic = {'viagem': Viagem(), 'lista_viagem':[]}
+
+  dic['lista_viagem'] = Viagem.objects.all()
+
+#Selecioando o ônibus na modal e passando para o formulário
+  ##if 'id_onibus' in request.POST:
+  #obj = Onibus.objects.get(pk=int(request.POST['placa']))
+    #import pdb; pdb.set_trace()
+
+  if request.method == 'POST':
+    post = lambda x, y: request.POST.get(x,y)
+
+    #dic['viagem'].nome_empresa = obj.placa
+    dic['viagem'].origem = post('inputOrigem', 'BH')
+    dic['viagem'].destino = post('inputDestino', 'Betim')
+    dic['viagem'].data_saida = post('inputDataSaida', '12/10/2017')
+    dic['viagem'].hora_saida = post('inputHoraSaida', '17:45')
+    dic['viagem'].hora_chegada = post('inputHoraChegada', '8:40')
+    
+    dic['viagem'].save()
+    dic['viagem'] = Viagem()
+
+
+
+
+  return render(request, 'cadastrar-viagem.html', ctx, dic)

@@ -33,4 +33,13 @@ $(document).ready(function() {
         // Remove a linha da tabela correspondente ao ônibus excluído.
         $(this).parent().remove();
 	});
+
+	$('#seleciona_onibus').bind("click",function(e){
+        e.preventDefault;
+        var placa = $('#seleciona_onibus').text();
+        console.log(placa);
+        $('#inputPlaca').val(placa);
+    });
+
+
 });

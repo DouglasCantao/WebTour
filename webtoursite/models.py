@@ -7,12 +7,13 @@ from decimal import Decimal
 from django.db.models import Model, CharField, IntegerField, DecimalField
 from django.db.models import BooleanField
 from django.contrib.auth.models import User
+from django.db import models
 
 # Classes em Python que representam as tabelas do banco de dados
 # A princípio as tabelas não estão normalizadas. Serão atualizadas em uma
 # oportunidade próxima.
-class Viagem(Model):
-    nome_empresa = CharField(max_length=25)
+class Viagem(models.Model):
+    nome_empresa = models.CharField(max_length=25)
     origem = CharField(max_length=250)
     destino = CharField(max_length=250)
     data_saida = CharField(max_length=250)
@@ -23,7 +24,7 @@ class Viagem(Model):
     qtde_assentos_disp = CharField(max_length=50)
 
 
-class Onibus(Model):
+class Onibus(models.Model):
     placa = CharField(max_length=7, default='')
     categoria = CharField(max_length=1, default=u'Ônibus')
     qtde_lugares = IntegerField(default=0)
@@ -32,7 +33,7 @@ class Onibus(Model):
     dono_id = IntegerField(default=0)
 
 
-class Passageiro(Model):
+class Passageiro(models.Model):
     cpf = CharField(max_length=11, default='')
     nome = CharField(max_length=20, default='')
     telefone = CharField(max_length=13, default='')
