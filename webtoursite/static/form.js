@@ -34,11 +34,30 @@ $(document).ready(function() {
         $(this).parent().remove();
 	});
 
-	$('#seleciona_onibus').bind("click",function(e){
-        e.preventDefault;
-        var placa = $('#seleciona_onibus').text();
-        console.log(placa);
-        $('#inputPlaca').val(placa);
+	$('#seleciona_onibus').onClick(function(e){                                   
+        var placa = $(this).text();                                             
+                                                                                
+        console.log(placa);                                                     
+                                                                                
+        $('#inputPlaca').val(placa);                                            
+    });
+
+    $('.remove_viagem').click(function(e){
+    	$.post('remove_viagem', {'id_viagem': $(this).attr('id')}, function(data, status){
+        	alert("Data: " + data + "\nStatus: " + status);
+    	});
+        
+        // Remove a linha da tabela correspondente ao ônibus excluído.
+        $(this).parent().remove();
+	});
+
+    $('.remove_motorista').click(function(e){
+        $.post('remove_motorista', {'id_motorista': $(this).attr('id')}, function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+        
+        // Remove a linha da tabela correspondente ao ônibus excluído.
+        $(this).parent().remove();
     });
 
 

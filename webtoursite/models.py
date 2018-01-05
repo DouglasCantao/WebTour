@@ -38,3 +38,9 @@ class Passageiro(models.Model):
     nome = CharField(max_length=20, default='')
     telefone = CharField(max_length=13, default='')
     email = CharField(max_length=50, default='')
+
+class Motorista(models.Model):
+    cnh = models.CharField(max_length=13, default='')
+    nome = models.CharField(max_length=25, default='')
+    telefone = models.CharField(max_length=16, default='')
+    email = models.CharField(max_length=40, default='')

@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.forms import modelformset_factory
 
 # Webtoursite
-from webtoursite.models import Viagem, Onibus, Passageiro
+from webtoursite.models import Viagem, Onibus, Passageiro, Motorista
 
 ## Decorators
 def acesso_autenticado(func):
@@ -226,7 +226,7 @@ def contato(request):
 def cadastrarViagem(request):
   #Passando apenas os ônibus referente ao usuário logado para a modal
   onibus = Onibus.objects.filter(dono_id=request.user.id)
-  ctx = {'onibus': onibus}
+  
 
 
   #Exibir viagem cadastradas
@@ -234,25 +234,58 @@ def cadastrarViagem(request):
 
   dic['lista_viagem'] = Viagem.objects.all()
 
-#Selecioando o ônibus na modal e passando para o formulário
-  ##if 'id_onibus' in request.POST:
-  #obj = Onibus.objects.get(pk=int(request.POST['placa']))
-    #import pdb; pdb.set_trace()
+  ctx = {'onibus': onibus, 'lista_viagem': dic['lista_viagem']}
+
 
   if request.method == 'POST':
     post = lambda x, y: request.POST.get(x,y)
 
-    #dic['viagem'].nome_empresa = obj.placa
-    dic['viagem'].origem = post('inputOrigem', 'BH')
-    dic['viagem'].destino = post('inputDestino', 'Betim')
-    dic['viagem'].data_saida = post('inputDataSaida', '12/10/2017')
-    dic['viagem'].hora_saida = post('inputHoraSaida', '17:45')
-    dic['viagem'].hora_chegada = post('inputHoraChegada', '8:40')
+    dic['viagem'].nome_empresa = post('inputPlaca', '')
+    dic['viagem'].origem = post('inputOrigem', '')
+    dic['viagem'].destino = post('inputDestino', '')
+    dic['viagem'].data_saida = post('inputDataSaida', '')
+    dic['viagem'].hora_saida = post('inputHoraSaida', '')
+    dic['viagem'].hora_chegada = post('inputHoraChegada', '')
     
     dic['viagem'].save()
     dic['viagem'] = Viagem()
 
 
+  return render(request, 'cadastrar-viagem.html', ctx)
+
+@acesso_autenticado
+def motorista(request):
+    dic = {'motorista': Motorista(), 'lista_motorista':[]}
+
+    dic['lista_motorista'] = Motorista.objects.all()
+
+    if request.method == 'POST':
+        post = lambda x, y: request.POST.get(x,y)
+
+        dic['motorista'].cnh = post('inputCnh', '')
+        dic['motorista'].nome = post('inputNome', '')
+        dic['motorista'].telefone = post('inputTelefone', '')
+        dic['motorista'].email = post('inputEmail', '')
+        dic['motorista'].save()
+        dic['motorista'] = Motorista()
+    return render(request, 'motorista.html', dic)
+
+def remove_motorista(request):
+    if 'id_motorista' in request.POST:
+        obj = Motorista.objects.get(pk=int(request.POST['id_motorista']))
+        obj.delete()
+
+    return HttpResponse('Removido com sucesso.')
 
 
-  return render(request, 'cadastrar-viagem.html', ctx, dic)
+
+#remove viagem do banco
+def remove_viagem(request):
+         if 'id_viagem' in request.POST:
+                  obj = Viagem.objects.get(pk=int(request.POST['id_viagem']))
+                  obj.delete()
+
+         return HttpResponse('Removido com sucesso.')
+
+def futuro(request):
+  return render(request, 'futuro.html')

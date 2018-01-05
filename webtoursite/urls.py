@@ -14,4 +14,8 @@ urlpatterns = [
     url(r'^remove_onibus$', views.remove_onibus, name='remove_onibus'),
     url(r'^remove_passageiro$', views.remove_passageiro, name='remove_passageiro'),
     url(r'^cadastrarviagem$', views.cadastrarViagem, name='cadastrarviagem'),
+    url(r'^remove_viagem$', views.remove_viagem, name='remove_viagem'),
+    url(r'^remove_motorista$', views.remove_motorista, name='remove_motorista'),
+    url(r'^motorista$', views.motorista, name='motorista'),
+    url(r'^futuro$', views.futuro, name='futuro'),
 ]

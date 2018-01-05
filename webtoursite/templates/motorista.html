@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="{% static "jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "form.js" %}"></script>
+
+</head>
+
+<body>
+    {% block body %}
+    <div id="wrapper">
+        
+        <div id="page-wrapper">
+            <div>
+                <h2>Cadastro Motorista</h2>
+            </div> <!--<div class="table-responsive col-md-12"> -->
+
+            <form id="cadastroVeiculo" data-toggle="validator" method='POST'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <label for="cnh">CNH</label>
+                        <input type="text" class="form-control" id="inputCnh" name="inputCnh" placeholder="Digite o valor">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Digite o valor">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder="Digite o valor">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="Digite o valor">
+                    </div>
+
+                    <div class="form-group col-md-3" style="padding-top: 24px;">
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-striped" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>CNH</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th class="actions">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in lista_motorista %}
+                    <tr>
+                        <td>{{ i.cnh }}</td>
+                        <td>{{ i.nome }}</td>
+                        <td>{{ i.telefone }}</td>
+                        <td>{{ i.email }}</td>
+                        <td id="{{ i.id }}" class="remove_motorista"><i class="material-icons"><a href="#">delete</a></i></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
