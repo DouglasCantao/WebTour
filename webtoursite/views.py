@@ -29,7 +29,6 @@ def login(request):
         nome_usuario = request.POST['nome_usuario']
         senha = request.POST['senha']
 
-        print(senha)
         usuario = authenticate(request, username=nome_usuario, password=senha)
 
         if usuario is not None:
@@ -57,9 +56,15 @@ def cadastro(request):
         # Caso valide, criar e salvar um usuário no banco de dados e
         # redirecionar para a tela de painel de controle (fazer o login do
         # Django).
-
+        lst = User.objects.filter(username=request.POST['usuario'])
         usr = User()
 
+        # Se o username já estiver sendo utilizado.
+        # TODO: Tratar erro na tela (tem que enviar a informação e exibir)
+        if(lst.count() > 0):
+          ctx ={"erro_user": 'Usuário indisponível', "erro_email": 'E-mail já está cadastrado.'}
+          return render(request, 'cadastro.html', ctx)
+        # Salva o usuário no banco.
         usr.username = request.POST['usuario']
         usr.first_name = request.POST['nome']
         usr.last_name = request.POST['sobrenome']
