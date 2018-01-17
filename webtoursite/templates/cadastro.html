@@ -44,7 +44,7 @@
 
             <div class="masthead clearfix">
               <div class="inner">
-                <h3 class="masthead-brand" style="text-align: center;"> Bem vindo ao Web Tour</h3>
+                <h3 class="masthead-brand"><a href="{% url 'login' %}" style="text-decoration: none;">GTur</a></h3>
               </div>
             </div>
 
@@ -55,9 +55,11 @@
                 <input name="nome" type="text" id="inputNome" class="form-control" placeholder="Nome" required autofocus>
                 <input name="sobrenome" type="text" id="inputSobrenome" class="form-control" placeholder="Sobrenome" required autofocus>
                 <input name="usuario" type="text" id="inputUsuario" class="form-control" placeholder="Nome de Usuário" required autofocus>
-                {% if erro %}{{ erro }}
+                {% if erro_user %}{{ erro_user }}
                 {% endif %}
                 <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                {% if erro_email %}{{ erro_email }}
+                {% endif %}
                 <input name="senha" type="password" id="inputSenha" class="form-control" placeholder="Digite sua senha" required>
                 <input name="senha2" type="password" id="inputSenha2" class="form-control" placeholder="Digite sua senha novamente" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>

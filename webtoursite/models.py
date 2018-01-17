@@ -22,6 +22,7 @@ class Viagem(models.Model):
     hora_chegada = CharField(max_length=250)
     qtde_assentos = CharField(max_length=50)
     qtde_assentos_disp = CharField(max_length=50)
+    dono_id = IntegerField(default=0)
 
 
 class Onibus(models.Model):
@@ -38,6 +39,7 @@ class Passageiro(models.Model):
     nome = CharField(max_length=20, default='')
     telefone = CharField(max_length=13, default='')
     email = CharField(max_length=50, default='')
+    dono_id = IntegerField(default=0)
 
 
 class Motorista(models.Model):
@@ -45,3 +47,4 @@ class Motorista(models.Model):
     nome = models.CharField(max_length=25, default='')
     telefone = models.CharField(max_length=16, default='')
     email = models.CharField(max_length=40, default='')
+    dono_id = IntegerField(default=0)

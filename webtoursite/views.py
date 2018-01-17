@@ -57,12 +57,15 @@ def cadastro(request):
         # redirecionar para a tela de painel de controle (fazer o login do
         # Django).
         lst = User.objects.filter(username=request.POST['usuario'])
+        lst_email = User.objects.filter(email=request.POST['email'])
         usr = User()
 
         # Se o username já estiver sendo utilizado.
         # TODO: Tratar erro na tela (tem que enviar a informação e exibir)
         if(lst.count() > 0):
-          ctx ={"erro_user": 'Usuário indisponível', "erro_email": 'E-mail já está cadastrado.'}
+          ctx ={"erro_user": 'Nome de usuário indisponível', "erro_email": 'E-mail já está cadastrado.'}
+        elif(lst_email.count() > 0):
+          ctx ={"erro_email": 'E-mail já está cadastrado.'}
           return render(request, 'cadastro.html', ctx)
         # Salva o usuário no banco.
         usr.username = request.POST['usuario']
@@ -83,6 +86,10 @@ def cadastro(request):
 def paineldecontrole(request):
     return render(request, 'paineldecontrole.html')
 
+
+
+def profile(request):
+  return render(request, 'profile.html')
 
 
 
@@ -111,11 +118,13 @@ def contato(request):
          return render(request, 'contato.html')
 
 
-
+@acesso_autenticado
 def listaviagem(request):
-         viagens = Viagem.objects.all()
-         ctx = {'viagens': viagens}
-         return render(request, 'listaviagem.html', ctx)
+
+  viagens = Viagem.objects.filter(dono_id=request.user.id)
+  ctx = {'viagens': viagens}
+
+  return render(request, 'listaviagem.html', ctx)
 
 @acesso_autenticado
 def onibus(request):
@@ -178,10 +187,10 @@ def remove_onibus(request):
 
 
 ###########################################passageiro#######################################
+@acesso_autenticado
 def passageiro(request):
          dic = {'passageiro': Passageiro(), 'lista_passageiro':[]}
-
-         dic['lista_passageiro'] = Passageiro.objects.all()
+         dic['lista_passageiro'] = Passageiro.objects.filter(dono_id=request.user.id)
 
 
 
@@ -192,6 +201,7 @@ def passageiro(request):
                   dic['passageiro'].nome = post('inputNome', 'Sebastiana')
                   dic['passageiro'].telefone = post('inputTelefone', '31988457474')
                   dic['passageiro'].email = post('inputEmail', 'pedro@viagens.com.br')
+                  dic['passageiro'].dono_id = request.user.id
 
                   dic['passageiro'].save()
                   dic['passageiro'] = Passageiro()
@@ -237,9 +247,10 @@ def cadastrarViagem(request):
   #Exibir viagem cadastradas
   dic = {'viagem': Viagem(), 'lista_viagem':[]}
 
-  dic['lista_viagem'] = Viagem.objects.all()
+  dic['lista_viagem'] = Viagem.objects.filter(dono_id=request.user.id)
 
-  ctx = {'onibus': onibus, 'lista_viagem': dic['lista_viagem']}
+
+  ctx = {'onibus': onibus, 'lista_viagem_banco': dic['lista_viagem']}
 
 
   if request.method == 'POST':
@@ -251,6 +262,7 @@ def cadastrarViagem(request):
     dic['viagem'].data_saida = post('inputDataSaida', '')
     dic['viagem'].hora_saida = post('inputHoraSaida', '')
     dic['viagem'].hora_chegada = post('inputHoraChegada', '')
+    dic['viagem'].dono_id = request.user.id
     
     dic['viagem'].save()
     dic['viagem'] = Viagem()
@@ -262,7 +274,7 @@ def cadastrarViagem(request):
 def motorista(request):
     dic = {'motorista': Motorista(), 'lista_motorista':[]}
 
-    dic['lista_motorista'] = Motorista.objects.all()
+    dic['lista_motorista'] = Motorista.objects.filter(dono_id=request.user.id)
 
     if request.method == 'POST':
         post = lambda x, y: request.POST.get(x,y)
@@ -271,6 +283,8 @@ def motorista(request):
         dic['motorista'].nome = post('inputNome', '')
         dic['motorista'].telefone = post('inputTelefone', '')
         dic['motorista'].email = post('inputEmail', '')
+        dic['motorista'].dono_id = request.user.id
+
         dic['motorista'].save()
         dic['motorista'] = Motorista()
     return render(request, 'motorista.html', dic)

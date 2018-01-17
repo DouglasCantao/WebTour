@@ -34,7 +34,7 @@ $(document).ready(function() {
         $(this).parent().remove();
 	});
 
-	$('#seleciona_onibus').onClick(function(e){                                   
+	$('#seleciona_onibus').click(function(e){                                   
         var placa = $(this).text();                                             
                                                                                 
         console.log(placa);                                                     
@@ -60,5 +60,19 @@ $(document).ready(function() {
         $(this).parent().remove();
     });
 
+// -------------------- Tela de Perfil --------------------------------
+    $('#editar').click(function(e){
+        event.preventDefault();                                                                               
+
+        $("input").prop("disabled", false);                                                    
+                                            
+    });
+
+    $('#salvar').click(function(e){
+        event.preventDefault();                                                                               
+
+        $("input").prop("disabled", true);                                                    
+                                            
+    });
 
 });

@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^remove_motorista$', views.remove_motorista, name='remove_motorista'),
     url(r'^motorista$', views.motorista, name='motorista'),
     url(r'^futuro$', views.futuro, name='futuro'),
+    url(r'^profile$', views.profile, name='profile'),
 ]
