@@ -34,14 +34,15 @@ $(document).ready(function() {
         $(this).parent().remove();
 	});
 
+    // ----------------------Tratamento da modal----------------------------
 	$('#seleciona_onibus').click(function(e){                                   
         var placa = $(this).text();                                             
+                                                                                                                                    
                                                                                 
-        console.log(placa);                                                     
-                                                                                
-        $('#inputPlaca').val(placa);                                            
+        $('#inputPlaca').val(placa);
+        $('#myModal').modal('hide');                                        
     });
-
+    // --------------------- Tela de Cadastro de Viagem----------------------
     $('.remove_viagem').click(function(e){
     	$.post('remove_viagem', {'id_viagem': $(this).attr('id')}, function(data, status){
         	alert("Data: " + data + "\nStatus: " + status);
@@ -64,14 +65,14 @@ $(document).ready(function() {
     $('#editar').click(function(e){
         event.preventDefault();                                                                               
 
-        $("input").prop("disabled", false);                                                    
+        $(".input-form").prop("disabled", false);                                                    
                                             
     });
 
     $('#salvar').click(function(e){
-        event.preventDefault();                                                                               
+                                                                                      
 
-        $("input").prop("disabled", true);                                                    
+        $(".input-form").prop("disabled", true);                                                
                                             
     });
 
